@@ -218,12 +218,17 @@ class HamsterIndicator(HamsterApplet):
             duration = delta.seconds /  60
             label = "%s %s" % (self.last_activity['name'],
                                stuff.format_duration(duration, False))
+            indicator_label = label
             self.set_activity_text(self.last_activity['name'],
                                  stuff.format_duration(duration, False))
         else:
             self.stop_activity_item.set_sensitive(0)
             label = "%s" % _(u"New activity")#_(u"No activity")
+            indicator_label = _(u"No activity")
             self.set_activity_text(label, None)
+        
+        # Update the indicator label
+        self.indicator.set_label(indicator_label)
 
         # Update the menu or the new activity text won't show up
         self.refresh_menu()
